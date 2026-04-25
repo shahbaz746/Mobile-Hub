@@ -1,1 +1,22 @@
 @import "tailwindcss";
+
+@theme {
+  --animate-float: float 3.5s ease-in-out infinite;
+  --animate-float-badge: floatBadge 3.5s ease-in-out infinite;
+  --animate-float-rating: floatRating 3.5s ease-in-out 0.9s infinite;
+
+  --keyframes-float: {
+    0%, 100% { transform: translateY(0); }
+    50%       { transform: translateY(-12px); }
+  };
+
+  --keyframes-floatBadge: {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50%       { transform: translateX(-50%) translateY(-7px); }
+  };
+
+  --keyframes-floatRating: {
+    0%, 100% { transform: translateY(0); }
+    50%       { transform: translateY(-8px); }
+  };
+}
