@@ -3,9 +3,11 @@ import { NavLink } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMagnifyingGlass, faShoppingCart, faBars, faTimes, faMobileAlt } from '@fortawesome/free-solid-svg-icons'
 
-const Navbar = () => {
+const Navbar = ({ searchQuery, setSearchQuery }) => {
   const [searchOpen, setSearchOpen] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
+
+  console.log("Navbar props:", { searchQuery, setSearchQuery });
 
   const navItems = [
     { name: "Home", path: "/" },
@@ -70,6 +72,8 @@ const Navbar = () => {
                   <input
                     autoFocus={searchOpen}
                     type="text"
+                     value={searchQuery}
+                     onChange={(e) => setSearchQuery(e.target.value)}
                     placeholder="Search phones..."
                     onKeyDown={e => e.key === 'Escape' && setSearchOpen(false)}
                     className="bg-transparent border-none outline-none text-sm text-slate-900 w-36 font-[inherit]"
