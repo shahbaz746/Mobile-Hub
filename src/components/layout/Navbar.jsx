@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { NavLink } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMagnifyingGlass, faShoppingCart, faBars, faTimes, faMobileAlt } from '@fortawesome/free-solid-svg-icons'
 
@@ -6,35 +7,54 @@ const Navbar = () => {
   const [searchOpen, setSearchOpen] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
 
+  const navItems = [
+    { name: "Home", path: "/" },
+    { name: "Products", path: "/products" },
+    { name: "About", path: "/about" },
+  ];
+
   return (
     <header className="bg-white shadow-sm sticky top-0 z-50 border-b border-slate-100">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <nav className="flex items-center justify-between h-16 relative">
 
           {/* Logo */}
-          <div className="flex items-center gap-2.5 flex-shrink-0">
-            <div className="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center shadow-md shadow-blue-300">
-              <FontAwesomeIcon icon={faMobileAlt} className="text-white text-sm" />
+          <NavLink to="/">
+            <div className="flex items-center gap-2.5 flex-shrink-0 cursor-pointer">
+
+              <div className="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center shadow-md shadow-blue-300">
+                <FontAwesomeIcon icon={faMobileAlt} className="text-white text-sm" />
+              </div>
+
+              <span className="text-lg font-bold text-slate-900 tracking-tight">
+                Mobile<span className="text-blue-600">Hub</span>
+              </span>
+
             </div>
-            <span className="text-lg font-bold text-slate-900 tracking-tight">
-              Mobile<span className="text-blue-600">Hub</span>
-            </span>
-          </div>
+          </NavLink>
 
           {/* Center Links */}
           <ul className="hidden md:flex items-center gap-9 list-none absolute left-1/2 -translate-x-1/2">
-            {['Home', 'Products', 'About'].map((item, i) => (
-              <li key={item}>
-                <a href="#" className={`relative text-sm font-medium transition-colors duration-200
-                  after:absolute after:bottom-[-4px] after:left-0 after:h-[2px] after:w-0 after:bg-blue-600
-                  after:rounded-full after:transition-all after:duration-300 hover:after:w-full
-                  ${i === 0
-                    ? 'text-slate-900 after:w-full'
-                    : 'text-slate-500 hover:text-slate-900'}`}>
-                  {item}
-                </a>
+
+            {navItems.map((item) => (
+              <li key={item.name}>
+                <NavLink
+                  to={item.path}
+                  className={({ isActive }) =>
+                    `relative text-sm font-medium transition-colors duration-200
+                     after:absolute after:bottom-[-4px] after:left-0 after:h-[2px] after:bg-blue-600
+                     after:rounded-full after:transition-all after:duration-300
+                     ${isActive
+                      ? "text-slate-900 after:w-full"
+                      : "text-slate-500 hover:text-slate-900 after:w-0 hover:after:w-full"
+                    }`
+                  }
+                >
+                  {item.name}
+                </NavLink>
               </li>
             ))}
+
           </ul>
 
           {/* Right Side */}
@@ -74,16 +94,21 @@ const Navbar = () => {
             </div>
 
             {/* Cart — solid dark blue, always visible */}
-            <button className="relative w-[38px] h-[38px] rounded-[9px] border-none
-              bg-blue-800 hover:bg-blue-700 flex items-center justify-center
-              cursor-pointer transition-all duration-200 hover:scale-105">
-              <FontAwesomeIcon icon={faShoppingCart} className="text-white text-sm" />
-              <span className="absolute -top-1.5 -right-1.5 w-[17px] h-[17px] bg-red-500
-                text-white text-[9px] font-bold rounded-full flex items-center justify-center
-                border-2 border-white">
-                3
-              </span>
-            </button>
+            <NavLink to="/cart">
+              <button
+                className="relative w-[38px] h-[38px] rounded-[9px] border-none
+                  bg-blue-800 hover:bg-blue-700 flex items-center justify-center
+                  cursor-pointer transition-all duration-200 hover:scale-105"
+              >
+                <FontAwesomeIcon icon={faShoppingCart} className="text-white text-sm" />
+
+                <span className="absolute -top-1.5 -right-1.5 w-[17px] h-[17px] bg-red-500
+                  text-white text-[9px] font-bold rounded-full flex items-center justify-center
+                  border-2 border-white">
+                  3
+                </span>
+              </button>
+            </NavLink>
 
             {/* Login */}
             <button className="hidden sm:block bg-blue-600 hover:bg-blue-700 text-white

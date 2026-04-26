@@ -1,5 +1,6 @@
 import React from 'react'
 import ProductCard from '../components/ProductCard'
+import { products } from '../data/Products'
 
 const Home = () => {
   return (
@@ -80,7 +81,7 @@ const Home = () => {
             from-blue-200 to-blue-100 rounded-[32px] overflow-hidden flex-shrink-0
             animate-float">
             <img
-              src="src/assets/Home Page Images/Google Pixal 10 pro xl.jpg"
+              src="/assets/Home-Page-Images/Google Pixel 10 pro xl.jpg"
               alt="Google Pixel 10 Pro XL"
               className="w-full h-full object-cover rounded-[32px] "
             />
@@ -108,48 +109,27 @@ const Home = () => {
       </div>
     </section> 
 
-    {/* Section -2: Featured Products */}
 
-   <section className="bg-slate-50 px-6 md:px-16 py-14">
+    {/* Section -2: Category Highlights */}
 
-      {/* Heading */}
-      <div className="text-center mb-10">
-        <span className="inline-flex items-center gap-2 bg-blue-100 text-blue-700
-          text-xs font-semibold px-3.5 py-1.5 rounded-full mb-3 tracking-wide">
-          <span className="w-1.5 h-1.5 rounded-full bg-blue-600 flex-shrink-0" />
-          Featured Products
-        </span>
-        <h2 className="text-3xl font-extrabold text-slate-900 tracking-tight">
-          Top <span className="text-blue-600">Smartphones</span>
-        </h2>
-      </div>
+    
 
-      {/* Row 1 — 3 equal cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-5 max-w-6xl mx-auto">
-        <ProductCard
-          title="iPhone 16 Pro Max"
-          price="$1099.99"
-          image="src/assets/Home Page Images/ProductCard/I phone 16 pro maz.jpg" />
-        <ProductCard
-          title="OnePlus 10 Pro"
-          price="$899.99"
-          image="src/assets/Home Page Images/ProductCard/oneplus-10.jpg" />
-        <ProductCard
-          title="Samsung Galaxy S25 Ultra"
-          price="$999.99"
-          image="src/assets/Home Page Images/ProductCard/Samsung s25 ultra.jpg" />
-      </div>
+    {/* Section -3: Featured Products */}
+    <section className="p-6">
+      
+      <h2 className="text-2xl font-bold mb-4">
+        Featured Products
+      </h2>
 
-      {/* Row 2 — 2 full-width cards centered */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 max-w-[66.6%] mx-auto">
-        <ProductCard
-          title="Oppo Reno 14"
-          price="$699.99"
-          image="src/assets/Home Page Images/ProductCard/Oppo reno 14.jpg" />
-        <ProductCard
-          title="Google Pixel 10 Pro XL"
-          price="$899.99"
-          image="src/assets/Home Page Images/Google Pixal 10 pro xl.jpg" />
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        
+        {products.map((product) => (
+          <ProductCard
+            key={product.id}
+            product={product}
+          />
+        ))}
+
       </div>
 
     </section>
